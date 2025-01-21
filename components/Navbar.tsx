@@ -12,15 +12,13 @@ const navLinks = [
   { href: "#testimonials", label: "Testimonials" },
 ];
 
-
-
 export default function Navbar() {
-    const [active, setActive] = useState("/");
-    const pathname = usePathname();
+  const [active, setActive] = useState("/");
+  const pathname = usePathname();
 
-    useEffect(() => {
-      setActive(pathname);
-    }, [pathname]);
+  useEffect(() => {
+    setActive(pathname);
+  }, [pathname]);
 
   return (
     <nav className="fixed top-0 w-full bg-black/80 backdrop-blur-md text-white p-4 shadow-md z-50">
