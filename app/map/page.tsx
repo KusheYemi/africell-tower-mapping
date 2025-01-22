@@ -1,12 +1,17 @@
 import Navbar from "../../components/Navbar";
+import ArcGISMap from "../../components/Map";
+import Footer from "../../components/Footer";
 
 export default function MapPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-grow flex items-center justify-center bg-gray-100">
-        <h1 className="text-4xl font-bold text-gray-800">Map Page</h1>
+      <main className="flex-grow">
+        <div className="h-[calc(100vh-64px)] mt-16">
+          <ArcGISMap />
+        </div>
       </main>
+      <Footer />
     </div>
   );
 }
