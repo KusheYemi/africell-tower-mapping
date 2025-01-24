@@ -4,12 +4,10 @@ import Footer from "../../components/Footer";
 
 export default function MapPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <div className="h-[calc(100vh-64px)] mt-16">
-          <ArcGISMap />
-        </div>
+        <ArcGISMap />
       </main>
       <Footer />
     </div>
