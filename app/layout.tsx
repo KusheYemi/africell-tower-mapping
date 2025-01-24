@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import CalciteInitializer from "../components/CalciteLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,21 @@ export default function RootLayout({
       <head>
         <link
           rel="stylesheet"
-          href="https://js.arcgis.com/4.24/esri/themes/light/main.css"
+          href="https://js.arcgis.com/4.31/esri/themes/light/main.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/@esri/calcite-components@2.13.2/dist/calcite/calcite.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.css"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <CalciteInitializer />
+        {children}
+      </body>
     </html>
   );
 }

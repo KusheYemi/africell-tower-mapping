@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
       process: require.resolve("process/browser"),
     };
 
+    // Add worker loader configuration
+    config.module.rules.push({
+      test: /\.worker\.js$/,
+      use: { loader: "worker-loader" },
+    });
+
     // Add Webpack plugins using proper imports
     config.plugins.push(
       new webpack.ProvidePlugin({

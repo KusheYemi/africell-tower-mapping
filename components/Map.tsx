@@ -10,29 +10,24 @@ export default function ArcGISMap() {
 
   useEffect(() => {
     esriConfig.assetsPath = "https://js.arcgis.com/4.31/";
+    esriConfig.workers.loaderUrl =
+      "https://js.arcgis.com/4.31/@arcgis/core/workers/arcgis-core-workers.js";
+
     let view: MapView | null = null;
 
-    const initializeMap = async () => {
-      try {
-        const webmap = new WebMap({
-          portalItem: {
-            id: "6a37f543b89d44fca8e387ee13bf085a",
-          },
-        });
+    const webmap = new WebMap({
+      portalItem: {
+        id: "8e823319e1ff4ded87cd40fea93ab54a",
+      },
+    });
 
-        view = new MapView({
-          container: mapRef.current!,
-          map: webmap,
-          padding: { top: 50 },
-        });
-
-        await webmap.load();
-      } catch (error) {
-        console.error("ArcGIS Map Error:", error);
-      }
-    };
-
-    initializeMap();
+    webmap.load().then(() => {
+      view = new MapView({
+        container: mapRef.current!,
+        map: webmap,
+        padding: { top: 50 },
+      });
+    });
 
     return () => {
       if (view) {
