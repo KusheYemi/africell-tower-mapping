@@ -25,10 +25,6 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://unpkg.com/@esri/calcite-components@2.13.2/dist/calcite/calcite.css"
         />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.css"
-        />
       </head>
       <body className={inter.className}>
         <CalciteInitializer />

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,8 +19,14 @@ export default function Navbar() {
     setActive(pathname);
   }, [pathname]);
 
+  // Conditional class for the navbar
+  const navbarClass =
+    pathname === "/map"
+      ? "relative w-full bg-black/80 backdrop-blur-md text-white p-4 shadow-md z-50"
+      : "fixed top-0 w-full bg-black/80 backdrop-blur-md text-white p-4 shadow-md z-50";
+
   return (
-    <nav className="fixed top-0 w-full bg-black/80 backdrop-blur-md text-white p-4 shadow-md z-50">
+    <nav className={navbarClass}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         <Link href="/">
           <Image

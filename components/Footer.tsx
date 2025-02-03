@@ -10,7 +10,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-gray-800 text-white text-center py-8">
+    <footer className="bg-gray-800 text-white text-center py-6">
       &copy; {year} Africell. All rights reserved. Developed by{" "}
       <a
         href="https://integemsgroup.com"
