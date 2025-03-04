@@ -1,17 +1,24 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import Stats from "../components/Stats";
-import Testimonials from "../components/Testimonials";
-import Footer from "../components/Footer";
+"use client";
+
+import dynamic from "next/dynamic";
+
+// Dynamically import components with SSR disabled for components that use browser APIs
+const Navbar = dynamic(() => import("../components/Navbar"), { ssr: true });
+const Hero = dynamic(() => import("../components/Hero"), { ssr: true });
+const Stats = dynamic(() => import("../components/Stats"), { ssr: true });
+const Testimonials = dynamic(() => import("../components/Testimonials"), {
+  ssr: true,
+});
+const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col">
       <Navbar />
       <Hero />
       <Stats />
       <Testimonials />
       <Footer />
-    </div>
+    </main>
   );
 }

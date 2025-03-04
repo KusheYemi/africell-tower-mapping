@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import esriConfig from "@arcgis/core/config";
+import { useEffect, useRef, useState } from "react";
 import WebMap from "@arcgis/core/WebMap";
 import MapView from "@arcgis/core/views/MapView";
+import { CalciteLoader } from "@esri/calcite-components-react";
+import { initializeArcGIS } from "../utils/config";
 
 export default function ArcGISMap() {
   const mapRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    esriConfig.assetsPath = "https://js.arcgis.com/4.31/";
-    esriConfig.workers.loaderUrl =
-      "https://js.arcgis.com/4.31/@arcgis/core/workers/arcgis-core-workers.js";
+    // Initialize ArcGIS configuration
+    initializeArcGIS();
 
     let view: MapView | null = null;
 
@@ -21,13 +22,34 @@ export default function ArcGISMap() {
       },
     });
 
-    webmap.load().then(() => {
-      view = new MapView({
-        container: mapRef.current!,
-        map: webmap,
-        padding: { top: 50 },
+    webmap
+      .load()
+      .then(() => {
+        try {
+          view = new MapView({
+            container: mapRef.current!,
+            map: webmap,
+            padding: { top: 50 },
+          });
+
+            view.when(
+            (): void => {
+              setIsLoading(false);
+            },
+            (error: Error): void => {
+              console.error("Map view initialization failed:", error);
+              setIsLoading(false);
+            }
+            );
+        } catch (error) {
+          console.error("Error creating map view:", error);
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error loading webmap:", error);
+        setIsLoading(false);
       });
-    });
 
     return () => {
       if (view) {
@@ -37,5 +59,14 @@ export default function ArcGISMap() {
     };
   }, []);
 
-  return <div ref={mapRef} className="w-full h-[calc(100vh-80px)]" />;
+  return (
+    <div className="relative w-full h-[calc(100vh-80px)]">
+      <div ref={mapRef} className="w-full h-full" />
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/80">
+          <CalciteLoader label="Loading map" scale="l" />
+        </div>
+      )}
+    </div>
+  );
 }

@@ -1,8 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import CalciteInitializer from "../components/CalciteLoader";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Africell Tower Mapping",
@@ -26,7 +23,7 @@ export default function RootLayout({
           href="https://unpkg.com/@esri/calcite-components@2.13.2/dist/calcite/calcite.css"
         />
       </head>
-      <body className={inter.className}>
+      <body className="antialiased">
         <CalciteInitializer />
         {children}
       </body>
